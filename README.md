@@ -34,6 +34,12 @@ LINE Messaging API
 ↓
 LINE通知
 
+## 環境変数
+
+- API_KEY
+- LINE_CHANNEL_ACCESS_TOKEN
+- LINE_USER_IDS
+
 ## 今後の改善予定
 
 - 地域登録機能

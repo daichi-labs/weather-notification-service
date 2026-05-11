@@ -40,9 +40,9 @@ LINE通知
 - LINE_CHANNEL_ACCESS_TOKEN
 - LINE_USER_IDS
 
-## システム構成図
+## システム構成図（通知機能）
 
-<img width="721" height="531" alt="architecture" src="https://github.com/user-attachments/assets/0c04a685-f077-4d65-8c0f-795ff0be0b1c" />
+<img width="650" height="531" alt="architecture" src="https://github.com/user-attachments/assets/0c04a685-f077-4d65-8c0f-795ff0be0b1c" />
 
 ## 今後の改善予定
 

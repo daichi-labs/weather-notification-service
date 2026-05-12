@@ -17,6 +17,7 @@ CloudWatch Logs に出力された情報から LINE userId を取得していま
 通知対象ユーザーとして Lambda の環境変数 `LINE_USER_IDS` に手動で設定しています。
 
 
+
 ## 2. 天気通知機能（weather-notification-function）
 
 毎朝6時に、その日の天気予報を LINE に自動通知する機能です。
@@ -40,6 +41,7 @@ LINE Messaging API 経由で登録ユーザーへ通知しています。
 - OpenWeather API
 - Python
 
+
 ## 主な機能
 
 - 毎朝6時に天気通知
@@ -48,15 +50,30 @@ LINE Messaging API 経由で登録ユーザーへ通知しています。
 - LINE通知
 - 複数ユーザー通知
 
+
 ## 環境変数
 
 - API_KEY
 - LINE_CHANNEL_ACCESS_TOKEN
 - LINE_USER_IDS
 
+
+
+## システム構成図（ユーザーID取得機能）
+
+<img width="771" height="321" alt="ユーザーID取得機能_line-webhook-receiver-function_構成図 drawio" src="https://github.com/user-attachments/assets/24ed4c9c-f3fd-49df-a3af-aa0fc0741004" />
+
+
+
+
+
+
+
 ## システム構成図（天気通知機能）
 
-<img width="721" height="531" alt="architecture" src="https://github.com/user-attachments/assets/0c04a685-f077-4d65-8c0f-795ff0be0b1c" />
+<img width="721" height="531" alt="天気通知機能_weather-notification-function_構成図 drawio" src="https://github.com/user-attachments/assets/c21f8b93-0706-4e87-b2c1-09684bb39266" />
+
+
 
 ## 今後の改善予定
 

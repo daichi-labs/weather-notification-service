@@ -2,8 +2,28 @@ import json
 import urllib.request
 import urllib.error
 import os
+import boto3
 
 from datetime import datetime, timedelta, timezone
+
+
+dynamodb = boto3.resource("dynamodb")
+table = dynamodb.Table("line-weather-notification-users")
+
+
+def get_line_user_ids():
+    response = table.scan()
+    items = response.get("Items", [])
+
+    user_ids = []
+
+    for item in items:
+        user_id = item.get("userId")
+
+        if user_id:
+            user_ids.append(user_id)
+
+    return user_ids
 
 
 def send_line_message(message):
@@ -14,7 +34,7 @@ def send_line_message(message):
         "Authorization": f"Bearer {os.environ['LINE_CHANNEL_ACCESS_TOKEN']}"
     }
 
-    user_ids = os.environ["LINE_USER_IDS"].split(",")
+    user_ids = get_line_user_ids()
 
     for user_id in user_ids:
         body = {
@@ -64,7 +84,12 @@ def lambda_handler(event, context):
             )
             forecast_time_jst = forecast_time_utc.astimezone(JST)
 
+            now_jst = datetime.now(JST)
+
             if forecast_time_jst.date() != today_jst:
+                continue
+
+            if forecast_time_jst < now_jst:
                 continue
 
             weather_main = item["weather"][0]["main"]
@@ -75,12 +100,18 @@ def lambda_handler(event, context):
             if weather_main == "Rain":
                 rain_times.append(forecast_time_jst)
 
+        if not temps:
+            return {
+                "statusCode": 200,
+                "body": "本日これからの天気予報データが取得できませんでした。"
+            }
+
         max_temp = max(temps)
         min_temp = min(temps)
 
         if not rain_times:
             message = (
-                "今日は雨の予報はなさそうです☀\n\n"
+                "今日は一日中晴れの見通しです☀\n\n"
                 f"最高気温: {max_temp:.1f}℃\n"
                 f"最低気温: {min_temp:.1f}℃"
             )

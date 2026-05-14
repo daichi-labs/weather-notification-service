@@ -1,5 +1,7 @@
 # 天気通知サービス　システム概要
 
+<img width="600" alt="LINE_背景" src="https://github.com/user-attachments/assets/3ccd055a-133f-4bc9-8c0b-4b9f6b6192ff" />
+
 本サービスは、以下2つの AWS Lambda によって構成されています。
 
 ## 1. ユーザーID取得機能（line-webhook-receiver-function）
@@ -88,6 +90,6 @@ LINE Messaging API 経由で DynamoDB に登録されたユーザーへ通知し
 ## 今後の改善予定
 
 - 地域登録機能
-- DynamoDBによるユーザー管理 → DynamoDBを用いたユーザ登録の自動化を完了
+- ユーザ登録の自動化 → DynamoDBを用いたユーザ登録の自動化を完了
 - Web UI作成
 - GitHub ActionsによるCI/CD
